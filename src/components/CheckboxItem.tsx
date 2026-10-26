@@ -39,7 +39,11 @@ export const CheckboxItem: FC<CheckboxItemProps> = ({
           className="peer sr-only"
         />
         <div
-          className={`checkbox-box border border-border bg-surface peer-checked:bg-accent peer-checked:border-accent flex items-center justify-center text-onAccent ${
+          className={`checkbox-box border flex items-center justify-center text-onAccent transition-colors ${
+            checked
+              ? 'bg-accent border-accent'
+              : 'bg-surface border-border'
+          } ${
             indent
               ? 'w-3.5 h-3.5 rounded-[3px]'
               : 'w-4 h-4 rounded-[4px]'
@@ -48,8 +52,12 @@ export const CheckboxItem: FC<CheckboxItemProps> = ({
           <svg
             className={`${
               indent ? 'w-2.5 h-2.5' : 'w-3 h-3'
-            } stroke-onAccent stroke-[2.5] fill-none opacity-0 peer-checked:opacity-100 transition-opacity`}
+            } stroke-current stroke-[2.5] fill-none transition-opacity duration-150 ${
+              checked ? 'opacity-100' : 'opacity-0'
+            }`}
             viewBox="0 0 24 24"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <polyline points="20 6 9 17 4 12" />
           </svg>
