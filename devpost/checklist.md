@@ -29,7 +29,7 @@ Build mode: learn
   Learner check: Reload extension, open YouTube homepage, tick "Hide Homepage recommendations" in popup, and verify the video feed vanishes immediately.
   Commit: `feat: implement storage manager and homepage decluttering end-to-end`
 
-- [ ] **3. Watch page master and granular distraction elimination**
+- [x] **3. Watch page master and granular distraction elimination**
   Becomes usable: On any YouTube watch page, user can quiet sidebar recommendations, comments, end screens, and info cards all at once or individually via master-child toggle synchronization.
   Why now: Watch page is the primary video consumption surface with hierarchical state (master toggle controlling 4 sub-toggles) and multi-element dynamic styling.
   PRD ref: `prd.md > The Core Journey` (step 4c), `prd.md > Features and Behaviors` (Watch Page Distraction Elimination), `prd.md > Screens and Layout` (Extension Toolbar Popup)
