@@ -99,6 +99,20 @@ export default function App() {
           />
         </ToggleGroup>
 
+        {/* Search Results Controls */}
+        <ToggleGroup
+          title="Search Results"
+          description="Clean up algorithmic clutter when looking for tutorials"
+        >
+          <CheckboxItem
+            id="hide-search-shorts"
+            label="Hide Shorts in search"
+            description="Removes Shorts shelves and reels from search results"
+            checked={settings.hideSearchShorts}
+            onChange={(checked) => handleToggle('hideSearchShorts', checked)}
+          />
+        </ToggleGroup>
+
         {/* Watch Page Controls */}
         <ToggleGroup
           title="Watch Page"
@@ -142,6 +156,20 @@ export default function App() {
             checked={settings.hideWatchInfoCards}
             onChange={(checked) => handleWatchSubToggle('hideWatchInfoCards', checked)}
             indent
+          />
+        </ToggleGroup>
+
+        {/* Shorts Redirection */}
+        <ToggleGroup
+          title="Shorts Redirection"
+          description="Calm standard player playback"
+        >
+          <CheckboxItem
+            id="redirect-shorts"
+            label="Redirect Shorts to standard player"
+            description="Opens /shorts/:id links in standard /watch?v=:id player"
+            checked={settings.redirectShorts}
+            onChange={(checked) => handleToggle('redirectShorts', checked)}
           />
         </ToggleGroup>
 
