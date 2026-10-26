@@ -9,7 +9,7 @@ Build mode: learn
 
 ## Slices
 
-- [ ] **1. Scaffold WXT extension with semantic theme and verify extension wiring (popup, background, content scripts)**
+- [x] **1. Scaffold WXT extension with semantic theme and verify extension wiring (popup, background, content scripts)**
   Becomes usable: A running browser extension with semantic dark theme styling (`bg-primary`, `text-onPrimary`, `border-border`, `accent-accent`). Opening the popup displays the styled TidyTube header and status, while the background service worker and YouTube content script run and log active lifecycle status.
   Why now: Proves the whole foundation and extension architecture first — WXT project build, manifest generation, semantic theme configuration, popup rendering, background service worker, and content script execution on YouTube — before layering on specific DOM manipulation rules.
   PRD ref: `prd.md > The Core Journey` (steps 1-2), `prd.md > Screens and Layout` (Extension Toolbar Popup), `prd.md > Look and Feel`
@@ -19,7 +19,7 @@ Build mode: learn
   Learner check: Load `.output/chrome-mv3` in `chrome://extensions`. Open the TidyTube toolbar popup to confirm the dark theme styling and title; navigate to `https://www.youtube.com` and open DevTools console to confirm content script initialization log.
   Commit: `feat: scaffold wxt extension with semantic theme and verify popup, background, and content scripts`
 
-- [ ] **2. Storage manager and YouTube Homepage decluttering end-to-end**
+- [x] **2. Storage manager and YouTube Homepage decluttering end-to-end**
   Becomes usable: TidyTube settings persist in `browser.storage.local`. Opening the popup reveals Homepage distraction checkboxes ("Hide Homepage recommendations", "Hide Homepage Shorts"); toggling them immediately hides or reveals the feeds on active YouTube tabs with zero reload.
   Why now: Proves the core reactive pipeline (Popup UI -> Local Storage -> In-memory Content Script Cache -> Dynamic CSS injection on YouTube) on the primary landing surface.
   PRD ref: `prd.md > The Core Journey` (steps 3, 4a, 5), `prd.md > Features and Behaviors` (Homepage Decluttering, Instant Reactivity and Caching)
@@ -51,7 +51,7 @@ Build mode: learn
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — Slice 1 (Scaffold, semantic theme, popup, background, and content script execution)
+- [x] Early usable behavior explored — Slice 1 (Scaffold, semantic theme, popup, background, and content script execution)
 - [ ] Final kick-the-tires exploration and feedback completed — Slice 4 (Full extension end-to-end across all surfaces)
 
 ## Final Review
