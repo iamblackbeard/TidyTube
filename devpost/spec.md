@@ -114,7 +114,7 @@ Implements `prd.md > Homepage Decluttering`, `prd.md > Search Results Cleaning`,
 - Maps active boolean settings to specific CSS rules using YouTube's robust structural selectors:
   - `hideHomeRecommendations`: `ytd-browse[page-subtype="home"] #primary, ytd-browse[page-subtype="home"] ytd-rich-grid-renderer { display: none !important; }`
   - `hideHomeShorts`: `ytd-browse[page-subtype="home"] ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]) { display: none !important; }`
-  - `hideSearchShorts`: `ytd-search ytd-reel-shelf-renderer, ytd-search ytd-shelf-renderer:has([href*="/shorts"]) { display: none !important; }`
+  - `hideSearchShorts`: `grid-shelf-view-model, shorts-lockup-view-model, yt-shorts-lockup-view-model, ytd-reel-shelf-renderer { display: none !important; }`
   - `hideWatchRecommendations`: `ytd-watch-flexy #secondary, ytd-watch-flexy #related { display: none !important; }`
   - `hideWatchComments`: `ytd-watch-flexy #comments, ytd-watch-flexy ytd-comments, ytd-watch-flexy #chat { display: none !important; }`
   - `hideWatchEndScreen`: `.ytp-ce-element, .ytp-endscreen-content { display: none !important; }`

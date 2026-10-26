@@ -28,11 +28,14 @@ export function generateCssRules(settings: TidyTubeSettings): string {
     `);
   }
 
-  // Search: Shorts shelves
+  // Search: Shorts shelves and standalone reel elements
   if (settings.hideSearchShorts) {
     rules.push(`
-      ytd-search ytd-reel-shelf-renderer,
-      ytd-search ytd-shelf-renderer:has([href*="/shorts"]) {
+      /* Target the Shorts shelf and lockup view models directly without touching parent containers */
+      grid-shelf-view-model,
+      shorts-lockup-view-model,
+      yt-shorts-lockup-view-model,
+      ytd-reel-shelf-renderer {
         display: none !important;
       }
     `);

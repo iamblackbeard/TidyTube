@@ -39,7 +39,7 @@ Build mode: learn
   Learner check: Reload extension, navigate to any YouTube video watch page, toggle "Hide Watch Distractions" in the popup, and verify comments, recommendations, and end cards are hidden immediately.
   Commit: `feat: add watch page master and granular distraction toggles`
 
-- [ ] **4. Search results decluttering and Shorts redirection**
+- [x] **4. Search results decluttering and Shorts redirection**
   Becomes usable: YouTube search results display cleanly without Shorts shelves, and clicking or navigating directly to any `/shorts/:id` link automatically redirects into the calm `/watch?v=:id` player.
   Why now: Completes the full core journey across all targeted YouTube surfaces by handling the remaining route selectors and hooking into YouTube's single-page app navigation lifecycle for URL rewriting.
   PRD ref: `prd.md > The Core Journey` (step 4b, 4d), `prd.md > Features and Behaviors` (Search Results Cleaning, Shorts Redirection)
@@ -71,3 +71,5 @@ Reflection: [offered/answered/declined/already covered — personal answer belon
 Activity mode: [live app and editor, explicit static fallback, focused alternative, prior practice, or recap]
 
 ## Revisions
+
+- Updated search shorts hiding and shorts redirection — YouTube modern search results render Lit Web Components (`shorts-lockup-view-model`, `grid-shelf-view-model`) rather than legacy shelf renderers, and SPA navigation events dispatch on `document` rather than `window`, with Shadow DOM link clicks requiring `event.composedPath()`.
