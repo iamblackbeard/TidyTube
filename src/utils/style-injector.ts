@@ -42,7 +42,8 @@ export function generateCssRules(settings: TidyTubeSettings): string {
   if (settings.hideWatchRecommendations) {
     rules.push(`
       ytd-watch-flexy #secondary,
-      ytd-watch-flexy #related {
+      ytd-watch-flexy #related,
+      #related.ytd-watch-flexy {
         display: none !important;
       }
     `);
@@ -53,7 +54,8 @@ export function generateCssRules(settings: TidyTubeSettings): string {
     rules.push(`
       ytd-watch-flexy #comments,
       ytd-watch-flexy ytd-comments,
-      ytd-watch-flexy #chat {
+      ytd-watch-flexy #chat,
+      ytd-live-chat-frame {
         display: none !important;
       }
     `);
@@ -63,7 +65,8 @@ export function generateCssRules(settings: TidyTubeSettings): string {
   if (settings.hideWatchEndScreen) {
     rules.push(`
       .ytp-ce-element,
-      .ytp-endscreen-content {
+      .ytp-endscreen-content,
+      .html5-endscreen {
         display: none !important;
       }
     `);
@@ -73,7 +76,8 @@ export function generateCssRules(settings: TidyTubeSettings): string {
   if (settings.hideWatchInfoCards) {
     rules.push(`
       .ytp-cards-teaser,
-      .ytp-cards-button {
+      .ytp-cards-button,
+      .ytp-suggested-action {
         display: none !important;
       }
     `);

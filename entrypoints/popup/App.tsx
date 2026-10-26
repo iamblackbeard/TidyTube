@@ -26,6 +26,54 @@ export default function App() {
     }
   };
 
+  const handleWatchMasterToggle = async (checked: boolean) => {
+    const updated: TidyTubeSettings = {
+      ...settings,
+      hideWatchDistractions: checked,
+      hideWatchRecommendations: checked,
+      hideWatchComments: checked,
+      hideWatchEndScreen: checked,
+      hideWatchInfoCards: checked,
+    };
+    setSettings(updated);
+    try {
+      await saveSettings(updated);
+    } catch (err) {
+      console.error('[TidyTube] Error updating master watch setting:', err);
+    }
+  };
+
+  const handleWatchSubToggle = async (
+    key: 'hideWatchRecommendations' | 'hideWatchComments' | 'hideWatchEndScreen' | 'hideWatchInfoCards',
+    value: boolean
+  ) => {
+    const nextSub = {
+      hideWatchRecommendations: key === 'hideWatchRecommendations' ? value : settings.hideWatchRecommendations,
+      hideWatchComments: key === 'hideWatchComments' ? value : settings.hideWatchComments,
+      hideWatchEndScreen: key === 'hideWatchEndScreen' ? value : settings.hideWatchEndScreen,
+      hideWatchInfoCards: key === 'hideWatchInfoCards' ? value : settings.hideWatchInfoCards,
+    };
+
+    const allChecked =
+      nextSub.hideWatchRecommendations &&
+      nextSub.hideWatchComments &&
+      nextSub.hideWatchEndScreen &&
+      nextSub.hideWatchInfoCards;
+
+    const updated: TidyTubeSettings = {
+      ...settings,
+      ...nextSub,
+      hideWatchDistractions: allChecked,
+    };
+
+    setSettings(updated);
+    try {
+      await saveSettings(updated);
+    } catch (err) {
+      console.error('[TidyTube] Error updating watch sub-setting:', err);
+    }
+  };
+
   return (
     <div className="w-[320px] bg-primary text-onPrimary font-sans select-none pb-2">
       <Header />
@@ -48,6 +96,52 @@ export default function App() {
             description="Removes Shorts carousels and shelves"
             checked={settings.hideHomeShorts}
             onChange={(checked) => handleToggle('hideHomeShorts', checked)}
+          />
+        </ToggleGroup>
+
+        {/* Watch Page Controls */}
+        <ToggleGroup
+          title="Watch Page"
+          description="Eliminate distractions while viewing video tutorials"
+        >
+          <CheckboxItem
+            id="hide-watch-distractions"
+            label="Hide all watch distractions"
+            description="Master switch: toggles all watch page controls"
+            checked={settings.hideWatchDistractions}
+            onChange={handleWatchMasterToggle}
+          />
+          <CheckboxItem
+            id="hide-watch-recommendations"
+            label="Hide sidebar recommendations"
+            description="Removes related video recommendations sidebar"
+            checked={settings.hideWatchRecommendations}
+            onChange={(checked) => handleWatchSubToggle('hideWatchRecommendations', checked)}
+            indent
+          />
+          <CheckboxItem
+            id="hide-watch-comments"
+            label="Hide comments & live chat"
+            description="Removes comments section and live chat panel"
+            checked={settings.hideWatchComments}
+            onChange={(checked) => handleWatchSubToggle('hideWatchComments', checked)}
+            indent
+          />
+          <CheckboxItem
+            id="hide-watch-endscreen"
+            label="Hide end-screen cards"
+            description="Blocks recommended video tiles at video end"
+            checked={settings.hideWatchEndScreen}
+            onChange={(checked) => handleWatchSubToggle('hideWatchEndScreen', checked)}
+            indent
+          />
+          <CheckboxItem
+            id="hide-watch-infocards"
+            label="Hide video info cards"
+            description="Silences pop-up teaser cards during video"
+            checked={settings.hideWatchInfoCards}
+            onChange={(checked) => handleWatchSubToggle('hideWatchInfoCards', checked)}
+            indent
           />
         </ToggleGroup>
 
