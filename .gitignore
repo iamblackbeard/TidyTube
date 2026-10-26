@@ -1,0 +1,14 @@
+# Personal learner context
+/devpost/learner-profile.md
+
+# Credentials & environment
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Build artifacts & cache
+.output/
+.wxt/
