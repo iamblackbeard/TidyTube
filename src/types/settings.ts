@@ -15,6 +15,9 @@ export interface TidyTubeSettings {
 
   // Shorts
   redirectShorts: boolean;
+
+  // Playlist
+  showPlaylistDuration: boolean;
 }
 
 export const DEFAULT_SETTINGS: TidyTubeSettings = {
@@ -27,6 +30,7 @@ export const DEFAULT_SETTINGS: TidyTubeSettings = {
   hideWatchEndScreen: false,
   hideWatchInfoCards: false,
   redirectShorts: false,
+  showPlaylistDuration: true,
 };
 
 export const SETTINGS_STORAGE_KEY = 'tidytube_settings';

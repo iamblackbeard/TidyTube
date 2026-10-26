@@ -1,6 +1,7 @@
 import { getSettings, watchSettings } from '../src/utils/storage';
 import { StyleInjector } from '../src/utils/style-injector';
 import { ShortsRedirector } from '../src/utils/shorts-redirector';
+import { PlaylistTimer } from '../src/utils/playlist-timer';
 import { DEFAULT_SETTINGS, type TidyTubeSettings } from '../src/types/settings';
 
 export default defineContentScript({
@@ -12,10 +13,11 @@ export default defineContentScript({
     // In-memory cache for instant zero-latency styling & redirection across SPA navigation
     let cachedSettings: TidyTubeSettings = { ...DEFAULT_SETTINGS };
 
-    // Apply active styles and check route redirection
+    // Apply active styles, check route redirection, and update playlist timer
     const handleRouteUpdate = () => {
       StyleInjector.update(cachedSettings);
       ShortsRedirector.checkAndRedirect(cachedSettings.redirectShorts);
+      PlaylistTimer.update(cachedSettings.showPlaylistDuration);
     };
 
     // 1. Initial settings load & route check

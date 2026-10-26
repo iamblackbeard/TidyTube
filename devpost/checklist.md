@@ -49,10 +49,20 @@ Build mode: learn
   Learner check: Reload extension, perform a YouTube search to verify no Shorts reels appear, and click/open a Shorts link to verify it automatically plays in the standard `/watch?v=` player.
   Commit: `feat: add search shorts cleaning and shorts redirection`
 
+- [ ] **5. YouTube playlist total duration calculation and popup toggle**
+  Becomes usable: On any YouTube `/playlist?list=...` page, a clock icon and total duration badge appears in the left sidebar metadata block (beneath video count and view count). Auto-generated mix playlists (`list=RD...`) display `∞`. Scrolling dynamically recalculates newly loaded videos with zero lag via debounced caching. In the popup, a new "Playlist" section with "Show playlist total duration" toggle allows enabling/disabling the badge in real-time.
+  Why now: Delivers the approved `devpost/playlistTime.md` feature, extending TidyTube from decluttering into focused study utility across YouTube's playlist surface.
+  PRD ref: `playlistTime.md > 1. Feature Overview & Placement`, `playlistTime.md > 2. Display Format & Time Breakdown`, `playlistTime.md > 3. Edge Cases & Special Handling`
+  Spec ref: `playlistTime.md > 4. Performance & Dynamic Scrolling Architecture`, `playlistTime.md > 5. Extension Settings & Real-Time Sync`
+  Build: Add `showPlaylistDuration: boolean` to `src/types/settings.ts` (default `true`) and update storage defaults. Add "Playlist" toggle section to `entrypoints/popup/App.tsx`. Implement `src/utils/playlist-timer.ts` to parse video durations (e.g. `ytd-playlist-video-renderer #time-status span`, `badge-shape`), cache durations by video ID in a Map, debounce updates by 300ms, handle `list=RD...` with `∞`, skip private/deleted videos, and inject a styled clock icon + duration element into the sidebar metadata area (`ytd-playlist-header-renderer` / `#metadata`). Integrate `PlaylistTimer` into `entrypoints/content.ts` lifecycle hooks (`yt-navigate-finish`, `yt-page-data-updated`, and popstate), running calculation when on `/playlist` and cleaning up when navigating away or toggled off.
+  Verify (mechanical): Run Node verification script testing timestamp parsing (`MM:SS`, `HH:MM:SS`, edge cases like missing or invalid times, RD mix detection, and time formatting `Xh Ym` / `Xm Ys`); run `npm run build` to confirm TypeScript compile and bundle generation cleanly succeed with zero errors.
+  Learner check: Reload extension, open a `/playlist` page on YouTube; observe clock icon and formatted total time in the sidebar below the video count. Scroll down to trigger lazy loading and verify the time updates smoothly. Open the TidyTube popup, toggle "Show playlist total duration" off/on, and verify the badge disappears/reappears immediately.
+  Commit: `feat: implement youtube playlist total duration calculation and popup toggle`
+
 ## Hands-on Checkpoints
 
 - [x] Early usable behavior explored — Slice 1 (Scaffold, semantic theme, popup, background, and content script execution)
-- [ ] Final kick-the-tires exploration and feedback completed — Slice 4 (Full extension end-to-end across all surfaces)
+- [ ] Final kick-the-tires exploration and feedback completed — Slice 5 (Full extension end-to-end across all surfaces including playlist duration)
 
 ## Final Review
 
@@ -73,3 +83,4 @@ Activity mode: [live app and editor, explicit static fallback, focused alternati
 ## Revisions
 
 - Updated search shorts hiding and shorts redirection — YouTube modern search results render Lit Web Components (`shorts-lockup-view-model`, `grid-shelf-view-model`) rather than legacy shelf renderers, and SPA navigation events dispatch on `document` rather than `window`, with Shadow DOM link clicks requiring `event.composedPath()`.
+- Added Slice 5 for YouTube Playlist Total Duration based on approved `devpost/playlistTime.md` specification.

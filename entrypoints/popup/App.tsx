@@ -173,6 +173,20 @@ export default function App() {
           />
         </ToggleGroup>
 
+        {/* Playlist Utilities */}
+        <ToggleGroup
+          title="Playlist"
+          description="Productivity utilities for course and lecture playlists"
+        >
+          <CheckboxItem
+            id="show-playlist-duration"
+            label="Show playlist total duration"
+            description="Calculates and displays total runtime in the sidebar"
+            checked={settings.showPlaylistDuration}
+            onChange={(checked) => handleToggle('showPlaylistDuration', checked)}
+          />
+        </ToggleGroup>
+
         {/* Quick hint */}
         <footer className="px-1 text-[11px] text-onSurface flex justify-between items-center">
           <span>{loaded ? 'Settings synced' : 'Loading settings...'}</span>
