@@ -75,126 +75,121 @@ export default function App() {
   };
 
   return (
-    <div className="w-[320px] bg-primary text-onPrimary font-sans select-none pb-2">
+    <div className="w-[350px] bg-primary text-onPrimary font-sans select-none flex flex-col">
       <Header />
-      <main className="p-3 space-y-3">
+      <main className="overflow-y-auto max-h-[480px] custom-scroll p-3.5 space-y-4 bg-primary">
         {/* Homepage Controls */}
-        <ToggleGroup
-          title="Homepage"
-          description="Control algorithmic distractions on the home feed"
-        >
+        <ToggleGroup title="Homepage">
           <CheckboxItem
             id="hide-home-recommendations"
-            label="Hide recommendations feed"
-            description="Replaces the endless home grid with a calm space"
+            label="Hide home recommendation feed"
+            description="Replaces endless homepage grid with a calm space"
             checked={settings.hideHomeRecommendations}
             onChange={(checked) => handleToggle('hideHomeRecommendations', checked)}
           />
           <CheckboxItem
             id="hide-home-shorts"
-            label="Hide Homepage Shorts"
-            description="Removes Shorts carousels and shelves"
+            label="Hide Shorts shelves"
+            description="Removes Shorts carousels and reels from home"
             checked={settings.hideHomeShorts}
             onChange={(checked) => handleToggle('hideHomeShorts', checked)}
           />
         </ToggleGroup>
 
+        <div className="h-px bg-borderSubtle mx-1" />
+
         {/* Search Results Controls */}
-        <ToggleGroup
-          title="Search Results"
-          description="Clean up algorithmic clutter when looking for tutorials"
-        >
+        <ToggleGroup title="Search Results">
           <CheckboxItem
             id="hide-search-shorts"
-            label="Hide Shorts in search"
-            description="Removes Shorts shelves and reels from search results"
+            label="Hide Shorts in search results"
+            description="Focus purely on relevant long-form video results"
             checked={settings.hideSearchShorts}
             onChange={(checked) => handleToggle('hideSearchShorts', checked)}
           />
         </ToggleGroup>
 
+        <div className="h-px bg-borderSubtle mx-1" />
+
         {/* Watch Page Controls */}
-        <ToggleGroup
-          title="Watch Page"
-          description="Eliminate distractions while viewing video tutorials"
-        >
+        <ToggleGroup title="Watch Page">
           <CheckboxItem
             id="hide-watch-distractions"
             label="Hide all watch distractions"
-            description="Master switch: toggles all watch page controls"
+            description="Master switch: toggles sidebar, comments & overlays"
             checked={settings.hideWatchDistractions}
             onChange={handleWatchMasterToggle}
+            isMaster
           />
-          <CheckboxItem
-            id="hide-watch-recommendations"
-            label="Hide sidebar recommendations"
-            description="Removes related video recommendations sidebar"
-            checked={settings.hideWatchRecommendations}
-            onChange={(checked) => handleWatchSubToggle('hideWatchRecommendations', checked)}
-            indent
-          />
-          <CheckboxItem
-            id="hide-watch-comments"
-            label="Hide comments & live chat"
-            description="Removes comments section and live chat panel"
-            checked={settings.hideWatchComments}
-            onChange={(checked) => handleWatchSubToggle('hideWatchComments', checked)}
-            indent
-          />
-          <CheckboxItem
-            id="hide-watch-endscreen"
-            label="Hide end-screen cards"
-            description="Blocks recommended video tiles at video end"
-            checked={settings.hideWatchEndScreen}
-            onChange={(checked) => handleWatchSubToggle('hideWatchEndScreen', checked)}
-            indent
-          />
-          <CheckboxItem
-            id="hide-watch-infocards"
-            label="Hide video info cards"
-            description="Silences pop-up teaser cards during video"
-            checked={settings.hideWatchInfoCards}
-            onChange={(checked) => handleWatchSubToggle('hideWatchInfoCards', checked)}
-            indent
-          />
+          <div className="ml-3 pl-3 border-l border-borderSubtle space-y-0.5 mt-1.5">
+            <CheckboxItem
+              id="hide-watch-recommendations"
+              label="Sidebar recommendations"
+              description="Removes related video recommendations sidebar"
+              checked={settings.hideWatchRecommendations}
+              onChange={(checked) => handleWatchSubToggle('hideWatchRecommendations', checked)}
+              indent
+            />
+            <CheckboxItem
+              id="hide-watch-comments"
+              label="Comments & live chat"
+              description="Removes comments section and live chat panel"
+              checked={settings.hideWatchComments}
+              onChange={(checked) => handleWatchSubToggle('hideWatchComments', checked)}
+              indent
+            />
+            <CheckboxItem
+              id="hide-watch-endscreen"
+              label="End-screen video cards"
+              description="Blocks recommended video tiles at video end"
+              checked={settings.hideWatchEndScreen}
+              onChange={(checked) => handleWatchSubToggle('hideWatchEndScreen', checked)}
+              indent
+            />
+            <CheckboxItem
+              id="hide-watch-infocards"
+              label="Video info teaser cards"
+              description="Silences pop-up teaser cards during video"
+              checked={settings.hideWatchInfoCards}
+              onChange={(checked) => handleWatchSubToggle('hideWatchInfoCards', checked)}
+              indent
+            />
+          </div>
         </ToggleGroup>
 
-        {/* Shorts Redirection */}
-        <ToggleGroup
-          title="Shorts Redirection"
-          description="Calm standard player playback"
-        >
+        <div className="h-px bg-borderSubtle mx-1" />
+
+        {/* Playback & Utilities */}
+        <ToggleGroup title="Player & Utilities">
           <CheckboxItem
             id="redirect-shorts"
             label="Redirect Shorts to standard player"
-            description="Opens /shorts/:id links in standard /watch?v=:id player"
+            description="Opens /shorts/ links in standard video player"
             checked={settings.redirectShorts}
             onChange={(checked) => handleToggle('redirectShorts', checked)}
           />
-        </ToggleGroup>
-
-        {/* Playlist Utilities */}
-        <ToggleGroup
-          title="Playlist"
-          description="Productivity utilities for course and lecture playlists"
-        >
           <CheckboxItem
             id="show-playlist-duration"
             label="Show playlist total duration"
-            description="Calculates and displays total runtime in the sidebar"
+            description="Calculates total study/course runtime in sidebar"
             checked={settings.showPlaylistDuration}
             onChange={(checked) => handleToggle('showPlaylistDuration', checked)}
           />
         </ToggleGroup>
-
-        {/* Quick hint */}
-        <footer className="px-1 text-[11px] text-onSurface flex justify-between items-center">
-          <span>{loaded ? 'Settings synced' : 'Loading settings...'}</span>
-          <span className="text-[10px] uppercase tracking-wider text-accent font-medium">
-            Live
-          </span>
-        </footer>
       </main>
+
+      {/* Footer Zone */}
+      <footer className="px-4 py-2.5 bg-surface border-t border-border flex items-center justify-between text-onSurface">
+        <div className="flex items-center gap-1.5 text-[11px]">
+          <span className="w-1.5 h-1.5 rounded-full bg-activeGreen" />
+          <span className="transition-colors">
+            {loaded ? 'Synced with YouTube' : 'Syncing...'}
+          </span>
+        </div>
+        <span className="text-[10px] font-mono text-textMuted">
+          Esc to close
+        </span>
+      </footer>
     </div>
   );
 }

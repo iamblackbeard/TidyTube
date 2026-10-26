@@ -4,6 +4,30 @@
 
 body {
   margin: 0;
-  width: 320px;
+  width: 350px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #0F0F0F;
+}
+
+/* Minimal sleek scrollbar matching text.html */
+.custom-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 9999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #3D3D3D;
+}
+
+/* Snappy smooth transitions */
+.checkbox-box {
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
 }
